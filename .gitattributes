@@ -1,0 +1,8 @@
+#OpenFOAMという言語として扱う
+#でないとC++扱いされて見にくい
+openfoam/**/0.org/*	linguist-language=OpenFOAM
+openfoam/**/constant/*	linguist-language=OpenFOAM
+openfoam/**/system/*	linguist-language=OpenFOAM
+
+#言語統計から除外
+openfoam/**/mesh/*.htm	linguist-documentation
