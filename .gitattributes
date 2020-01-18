@@ -1,8 +1,9 @@
 #OpenFOAMという言語として扱う
 #でないとC++扱いされて見にくい
+#->結局できなかった(github側が想定していない言語に設定することは出来ないのか？)
 #openfoam/**/0.org/*	linguist-language=OpenFOAM
 #openfoam/**/constant/*	linguist-language=OpenFOAM
-openfoam/**/system/*	linguist-language=OpenFOAM
+openfoam/**/system/*	linguist-language=cpp
 
 #言語統計から除外
 openfoam/**/mesh/*.htm	linguist-documentation
