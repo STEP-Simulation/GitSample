@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//圧縮性ソルバーであるrhoPimpleFoamを設定
+//適用可能な範囲はM<0.8まで
+//http://www.opencae.or.jp/wp-content/uploads/2018/02/sym2017_C17.pdf
+application     pimpleFoam;
+
+
+//計算を開始する時刻の設定
+//latestTime:存在する時刻の中でもっとも遅い時刻 (要するに最後の結果) から開始。
+//http://penguinitis.g1.xrea.com/study/OpenFOAM/control_calc.html
+startFrom       latestTime;
+
+//startFromでstartTimeを設定したときのみ
+//http://penguinitis.g1.xrea.com/study/OpenFOAM/control_calc.html
+startTime       0;
+
+//endTime:endTimeで指定した時刻で終了
+//http://penguinitis.g1.xrea.com/study/OpenFOAM/control_calc.html
+stopAt          endTime;
+
+//計算終了時刻
+endTime         0.0020;
+
+deltaT          1e-6;
+
+//出力の間隔の調整
+//adjustableRunTime:時間刻み幅自動調整を使用するときに設定
+writeControl    adjustableRunTime;
+
+//出力間隔の時間長さ
+writeInterval   0.00005;
+
+//計算結果を保存する個数
+//一番最後の出力から数えて、設定した数ぶんだけ結果を残し、それより前のものは削除する
+//0なら全部保存
+purgeWrite      0;
+
+//出力ファイルのフォーマット。asciiかbinaryか
+writeFormat     ascii;
+
+//出力する計算結果ファイルの数値の桁数
+writePrecision   8;
+
+//結果ファイルを圧縮して出力するかどうか
+writeCompression off;
+
+//出力時の時間のフォーマット
+//fixed:m.ddddd。dはtimePrecisionに従う
+timeFormat      fixed;
+
+//小数点以下の桁数の設定
+timePrecision   7;
+
+//実行中にcontrolDictを変更する際に、それを感知するかどうか
+//stopAtをwriteNowにすれば、現在時刻の計算が終了したらそれを出力して終了することができる
+runTimeModifiable true;
+
+functions
+{
+    //#includeFunc MachNo
+
+    //#includeFunc residuals(U,p,.....)で、ファイルresidualsを削除でもよい
+    #includeFunc residuals
+
+    #include "forces"
+
+}
+
+// ************************************************************************* //
