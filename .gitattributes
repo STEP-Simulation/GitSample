@@ -2,7 +2,7 @@
 #でないとC++扱いされて見にくい
 #openfoam/**/0.org/*	linguist-language=OpenFOAM
 #openfoam/**/constant/*	linguist-language=OpenFOAM
-#openfoam/**/system/*	linguist-language=OpenFOAM
+openfoam/**/system/*	linguist-language=Java
 
 #言語統計から除外
 openfoam/**/mesh/*.htm	linguist-documentation
